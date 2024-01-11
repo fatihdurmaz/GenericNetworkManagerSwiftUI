@@ -3,7 +3,8 @@
 ![Platform](https://img.shields.io/badge/Platform-iOS%20%7CMacOS-red.svg)
 ![License](https://img.shields.io/badge/License-MIT-blue.svg)
 
-Bu örnek proje, SwiftUI kullanarak Dependency Injection (DI) ve Singleton tasarım deseni kullanımını gösterir. Proje, Alamofire ile JSONPlaceholder API'den kullanıcıları çekmeyi amaçlar.
+Bu örnek proje, SwiftUI kullanarak Dependency Injection (DI) ve Singleton tasarım desenini, MVVM ve Generic Network Manager oluşturmayı gösterir. 
+Proje, Alamofire veya URLSession ile JSONPlaceholder API'den verileri çekmeyi amaçlar.
 
 ## ApiServiceProtocol Protocol
 
@@ -38,8 +39,48 @@ class AlamofireApiService: ApiServiceProtocol {
     }
 }
 ```
+
+## URLSessionApiService Singleton Implementation
+URLSessionApiService adlı sınıf, NetworkService protocolünü uygular ve bu sınıfı singleton olarak tasarlar.
+
+```swift
+class URLSessionApiService: ApiServiceProtocol {
+    
+    private init() { }
+    
+    static let shared = URLSessionApiService()
+    
+    func getRequest<T: Decodable>(endpoint: String, completion: @escaping (Result<T, Error>) -> Void) {
+        guard let url = URL(string: endpoint) else {
+            completion(.failure(NSError(domain: "Invalid URL", code: 0, userInfo: nil)))
+            return
+        }
+        
+        URLSession.shared.dataTask(with: url) { data, response, error in
+            if let error = error {
+                completion(.failure(error))
+                return
+            }
+            
+            guard let data = data else {
+                completion(.failure(NSError(domain: "Data not found", code: 0, userInfo: nil)))
+                return
+            }
+            
+            do {
+                let decodedData = try JSONDecoder().decode(T.self, from: data)
+                completion(.success(decodedData))
+            } catch {
+                completion(.failure(error))
+            }
+        }.resume()
+    }
+    
+}
+```
+
 ## UserViewModel
-UserViewModel adlı bir ViewModel sınıfı, kullanıcıları çekmek ve kullanıcı arayüzünü güncellemek için kullanılır. Dependency Injection kullanılarak ApiServiceProtocol enjekte edilir.
+UserViewModel adlı ViewModel sınıfı, kullanıcıları çekmek ve kullanıcı arayüzünü güncellemek için kullanılır. Dependency Injection kullanılarak ApiServiceProtocol enjekte edilir.
 
 ```swift
 class UserViewModel: ObservableObject {
@@ -69,7 +110,7 @@ class UserViewModel: ObservableObject {
 
 ```
 ## SwiftUI içerisinde Kullanımı
-Dependency Injection kullanılarak BaseNetworkService singleton olarak UserViewModel'e enjekte edilir ve bu ViewModel, ContentView tarafından kullanılır.
+Dependency Injection kullanılarak ApiServiceProtocol singleton olarak UserViewModel'e enjekte edilir ve bu ViewModel, UserListView tarafından kullanılır.
 ```swift
 struct UserListView: View {
     

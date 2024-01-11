@@ -13,7 +13,7 @@ class UserApiService{
         self.apiService = apiService
     }
     
-    func getUsers(completion: @escaping (Result<[User], Error>) -> Void ) -> Void{
+    func getUsers(completion: @escaping (Result<[User], Error>) -> Void ){
         apiService.getRequest(endpoint: "https://jsonplaceholder.typicode.com/users") { (result: Result<[User], Error>) in
             switch result {
             case .success(let data):

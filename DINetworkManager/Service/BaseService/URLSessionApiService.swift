@@ -13,7 +13,6 @@ class URLSessionApiService: ApiServiceProtocol {
     
     static let shared = URLSessionApiService()
     
-    // where neden kullanırız.
     func getRequest<T: Decodable>(endpoint: String, completion: @escaping (Result<T, Error>) -> Void) {
         guard let url = URL(string: endpoint) else {
             completion(.failure(NSError(domain: "Invalid URL", code: 0, userInfo: nil)))

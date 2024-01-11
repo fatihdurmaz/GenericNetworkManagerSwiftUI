@@ -7,6 +7,6 @@
 
 import Foundation
 
-class Constants{
-    static let selectedService: String = "URLSession"
+struct Constants {
+    static let baseURL = "https://jsonplaceholder.typicode.com/"
 }

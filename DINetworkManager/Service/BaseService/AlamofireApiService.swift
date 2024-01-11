@@ -8,11 +8,6 @@
 import Foundation
 import Alamofire
 
-protocol ApiServiceProtocol {
-    
-    func getRequest<T: Codable>(endpoint: String, completion: @escaping(Result<T, Error>) -> Void )
-}
-
 class AlamofireApiService: ApiServiceProtocol {
     
     private init() { }

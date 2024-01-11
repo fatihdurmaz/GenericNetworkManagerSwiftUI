@@ -6,6 +6,13 @@
 Bu örnek proje, SwiftUI kullanarak Dependency Injection (DI) ve Singleton tasarım desenini, MVVM ve Generic Network Manager oluşturmayı gösterir. 
 Proje, Alamofire veya URLSession ile JSONPlaceholder API'den verileri çekmeyi amaçlar.
 
+
+Singleton
+Dependency Injection
+MVVM
+Generic Network Layer
+Protocol Oriented Programming (POP)
+
 ## ApiServiceProtocol Protocol
 
 `ApiServiceProtocol` adlı bir protocol, ağ çağrıları yapmak için gerekli işlevselliği tanımlar.

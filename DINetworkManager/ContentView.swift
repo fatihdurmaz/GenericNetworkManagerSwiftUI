@@ -11,9 +11,9 @@ struct ContentView: View {
     var body: some View {
         NavigationStack {
             VStack {
-                UserListView(apiService: URLSessionApiService.shared)
+                SinglePostView()
             }
-            .navigationTitle("Generic Service")
+            .navigationTitle("Posts")
         }
     }
 }

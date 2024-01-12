@@ -7,7 +7,7 @@
 
 import Foundation
 
-class URLSessionApiService: ApiServiceProtocol {
+class URLSessionApiService {  // URLSession için Protocol implemente et.
     
     private init() { }
     

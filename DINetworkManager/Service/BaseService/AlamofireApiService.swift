@@ -14,9 +14,8 @@ class AlamofireApiService: ApiServiceProtocol {
     
     static let shared = AlamofireApiService()
     
-    // where neden kullanırız.
-    func getRequest<T: Codable>(endpoint: String, completion: @escaping (Result<T, Error>) -> Void) {
-        AF.request(endpoint)
+    func getRequest<T: Codable>(endpoint: URL, parameters: [String: Any]?, completion: @escaping (Result<T, Error>) -> Void) {
+        AF.request(endpoint, method: .get, parameters: parameters)
             .validate()
             .responseDecodable(of: T.self) { response in
                 switch response.result {
@@ -27,5 +26,4 @@ class AlamofireApiService: ApiServiceProtocol {
                 }
             }
     }
-    
 }

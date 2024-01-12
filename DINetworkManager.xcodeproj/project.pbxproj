@@ -9,37 +9,37 @@
 /* Begin PBXBuildFile section */
 		DE4A1EDD2B50327600C198BC /* ApiServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE4A1EDC2B50327600C198BC /* ApiServiceProtocol.swift */; };
 		DE5F53112B502CB40009C443 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE5F53102B502CB40009C443 /* Post.swift */; };
-		DE5F53132B502CF40009C443 /* PostApiService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE5F53122B502CF40009C443 /* PostApiService.swift */; };
 		DEC97CE42B4F60BA0059F398 /* DINetworkManagerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEC97CE32B4F60BA0059F398 /* DINetworkManagerApp.swift */; };
 		DEC97CE62B4F60BA0059F398 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEC97CE52B4F60BA0059F398 /* ContentView.swift */; };
 		DEC97CE82B4F60BB0059F398 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DEC97CE72B4F60BB0059F398 /* Assets.xcassets */; };
 		DEC97CEB2B4F60BB0059F398 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DEC97CEA2B4F60BB0059F398 /* Preview Assets.xcassets */; };
 		DEC97CFD2B4F60E70059F398 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = DEC97CFC2B4F60E70059F398 /* Alamofire */; };
-		DEC97CFF2B4F61520059F398 /* UserListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEC97CFE2B4F61520059F398 /* UserListView.swift */; };
-		DEC97D012B4F615B0059F398 /* Contants.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEC97D002B4F615B0059F398 /* Contants.swift */; };
+		DEC97CFF2B4F61520059F398 /* PostListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEC97CFE2B4F61520059F398 /* PostListView.swift */; };
+		DEC97D012B4F615B0059F398 /* ApiContants.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEC97D002B4F615B0059F398 /* ApiContants.swift */; };
 		DEC97D032B4F61600059F398 /* AlamofireApiService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEC97D022B4F61600059F398 /* AlamofireApiService.swift */; };
-		DEC97D052B4F61630059F398 /* UserApiService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEC97D042B4F61630059F398 /* UserApiService.swift */; };
+		DEC97D052B4F61630059F398 /* PostApiService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEC97D042B4F61630059F398 /* PostApiService.swift */; };
 		DEC97D072B4F61670059F398 /* URLSessionApiService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEC97D062B4F61670059F398 /* URLSessionApiService.swift */; };
-		DEC97D092B4F616B0059F398 /* UserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEC97D082B4F616B0059F398 /* UserViewModel.swift */; };
-		DEC97D0B2B4F616D0059F398 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEC97D0A2B4F616D0059F398 /* User.swift */; };
+		DEC97D092B4F616B0059F398 /* PostViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEC97D082B4F616B0059F398 /* PostViewModel.swift */; };
+		DEF652392B516BF200B173B7 /* PostDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEF652382B516BF200B173B7 /* PostDetailView.swift */; };
+		DEF6523B2B51802900B173B7 /* SinglePostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEF6523A2B51802900B173B7 /* SinglePostView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		DE4A1EDC2B50327600C198BC /* ApiServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiServiceProtocol.swift; sourceTree = "<group>"; };
 		DE5F53102B502CB40009C443 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
-		DE5F53122B502CF40009C443 /* PostApiService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostApiService.swift; sourceTree = "<group>"; };
 		DEC97CE02B4F60BA0059F398 /* DINetworkManager.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DINetworkManager.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DEC97CE32B4F60BA0059F398 /* DINetworkManagerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DINetworkManagerApp.swift; sourceTree = "<group>"; };
 		DEC97CE52B4F60BA0059F398 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		DEC97CE72B4F60BB0059F398 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DEC97CEA2B4F60BB0059F398 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		DEC97CFE2B4F61520059F398 /* UserListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserListView.swift; sourceTree = "<group>"; };
-		DEC97D002B4F615B0059F398 /* Contants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Contants.swift; sourceTree = "<group>"; };
+		DEC97CFE2B4F61520059F398 /* PostListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostListView.swift; sourceTree = "<group>"; };
+		DEC97D002B4F615B0059F398 /* ApiContants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiContants.swift; sourceTree = "<group>"; };
 		DEC97D022B4F61600059F398 /* AlamofireApiService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlamofireApiService.swift; sourceTree = "<group>"; };
-		DEC97D042B4F61630059F398 /* UserApiService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserApiService.swift; sourceTree = "<group>"; };
+		DEC97D042B4F61630059F398 /* PostApiService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostApiService.swift; sourceTree = "<group>"; };
 		DEC97D062B4F61670059F398 /* URLSessionApiService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionApiService.swift; sourceTree = "<group>"; };
-		DEC97D082B4F616B0059F398 /* UserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewModel.swift; sourceTree = "<group>"; };
-		DEC97D0A2B4F616D0059F398 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		DEC97D082B4F616B0059F398 /* PostViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewModel.swift; sourceTree = "<group>"; };
+		DEF652382B516BF200B173B7 /* PostDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDetailView.swift; sourceTree = "<group>"; };
+		DEF6523A2B51802900B173B7 /* SinglePostView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SinglePostView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,7 +65,6 @@
 		DE5F53092B50285A0009C443 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				DEC97D0A2B4F616D0059F398 /* User.swift */,
 				DE5F53102B502CB40009C443 /* Post.swift */,
 			);
 			path = Model;
@@ -74,7 +73,7 @@
 		DE5F530A2B5028670009C443 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				DEC97CFE2B4F61520059F398 /* UserListView.swift */,
+				DEF652372B516BE300B173B7 /* Post */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -82,7 +81,7 @@
 		DE5F530B2B50286C0009C443 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				DEC97D082B4F616B0059F398 /* UserViewModel.swift */,
+				DEC97D082B4F616B0059F398 /* PostViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -92,8 +91,7 @@
 			children = (
 				DE4A1EDB2B50326300C198BC /* Protocol */,
 				DE5F530D2B5028810009C443 /* BaseService */,
-				DEC97D042B4F61630059F398 /* UserApiService.swift */,
-				DE5F53122B502CF40009C443 /* PostApiService.swift */,
+				DEC97D042B4F61630059F398 /* PostApiService.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -119,7 +117,7 @@
 		DE5F530F2B50294F0009C443 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				DEC97D002B4F615B0059F398 /* Contants.swift */,
+				DEC97D002B4F615B0059F398 /* ApiContants.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -161,6 +159,16 @@
 				DEC97CEA2B4F60BB0059F398 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		DEF652372B516BE300B173B7 /* Post */ = {
+			isa = PBXGroup;
+			children = (
+				DEC97CFE2B4F61520059F398 /* PostListView.swift */,
+				DEF652382B516BF200B173B7 /* PostDetailView.swift */,
+				DEF6523A2B51802900B173B7 /* SinglePostView.swift */,
+			);
+			path = Post;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -239,17 +247,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DEF652392B516BF200B173B7 /* PostDetailView.swift in Sources */,
 				DEC97CE62B4F60BA0059F398 /* ContentView.swift in Sources */,
-				DEC97D092B4F616B0059F398 /* UserViewModel.swift in Sources */,
-				DE5F53132B502CF40009C443 /* PostApiService.swift in Sources */,
-				DEC97CFF2B4F61520059F398 /* UserListView.swift in Sources */,
+				DEC97D092B4F616B0059F398 /* PostViewModel.swift in Sources */,
+				DEC97CFF2B4F61520059F398 /* PostListView.swift in Sources */,
 				DEC97CE42B4F60BA0059F398 /* DINetworkManagerApp.swift in Sources */,
 				DEC97D072B4F61670059F398 /* URLSessionApiService.swift in Sources */,
-				DEC97D0B2B4F616D0059F398 /* User.swift in Sources */,
-				DEC97D012B4F615B0059F398 /* Contants.swift in Sources */,
+				DEF6523B2B51802900B173B7 /* SinglePostView.swift in Sources */,
+				DEC97D012B4F615B0059F398 /* ApiContants.swift in Sources */,
 				DE4A1EDD2B50327600C198BC /* ApiServiceProtocol.swift in Sources */,
 				DEC97D032B4F61600059F398 /* AlamofireApiService.swift in Sources */,
-				DEC97D052B4F61630059F398 /* UserApiService.swift in Sources */,
+				DEC97D052B4F61630059F398 /* PostApiService.swift in Sources */,
 				DE5F53112B502CB40009C443 /* Post.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

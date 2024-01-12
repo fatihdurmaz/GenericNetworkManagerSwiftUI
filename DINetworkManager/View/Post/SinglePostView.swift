@@ -13,10 +13,17 @@ struct SinglePostView: View {
     var body: some View {
         NavigationStack {
             List {
-                Text(viewModel.post?.title ?? "Veri Yok")
-                    .bold()
-                    .font(.headline)
-                Text(viewModel.post?.body ?? "Veri Yok")
+                HStack {
+                    Image(systemName: "book.pages")
+                    Text(viewModel.post?.title ?? "Veri Yok")
+                        .bold()
+                        .font(.headline)
+                }
+                
+                HStack {
+                    Image(systemName: "paragraphsign")
+                    Text(viewModel.post?.body ?? "Veri Yok")
+                }
             }
             .onAppear{
                 viewModel.fetchPostById(postId: 2)

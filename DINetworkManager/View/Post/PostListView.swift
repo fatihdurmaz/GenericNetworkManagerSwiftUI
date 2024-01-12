@@ -10,16 +10,16 @@ import SwiftUI
 
 struct PostListView: View {
     
-    //  constructor injection yöntemiyle di yapıyoruz burada. Listview kullanmak istediğim her yerde api servisi tanımlamak zorundayız
-    //    @StateObject var viewModel: PostViewModel
-    //
-    //    init(apiService:  ApiServiceProtocol) {
-    //        _viewModel = StateObject(wrappedValue: PostViewModel(postApiService: .init(apiService: apiService)))
-    //    }
+    //  constructor injection yöntemiyle DI yapıyoruz burada. PostListview kullanmak istediğim her yerde api servisi tanımlamak zorundayız
+    @StateObject var viewModel: PostViewModel
+    
+    init(apiService:  ApiServiceProtocol) {
+        _viewModel = StateObject(wrappedValue: PostViewModel(postApiService: .init(apiService: apiService)))
+    }
     
     
     // Alternatif kullanım
-    @StateObject var viewModel = PostViewModel(postApiService: .init(apiService: AlamofireApiService.shared))
+    //    @StateObject var viewModel = PostViewModel(postApiService: .init(apiService: AlamofireApiService.shared))
     
     
     var body: some View {
@@ -46,9 +46,19 @@ struct PostListView: View {
             //viewModel.fetchAllPosts(parameters: ["id":3])
             //viewModel.fetchAllPosts(parameters: ["userId":3])
         }
+        .toolbar {
+            Button(action: {
+                print("Merhaba")
+                let newPost = Post(userId: 2, id: 24, title: "Deneme", body: "Deneme İçeriği")
+                
+                viewModel.addPost(post: newPost)
+            }, label: {
+                Image(systemName: "plus")
+            })
+        }
     }
 }
 
 #Preview {
-    PostListView()
+    PostListView(apiService: AlamofireApiService.shared)
 }

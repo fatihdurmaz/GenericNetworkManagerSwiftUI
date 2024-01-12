@@ -45,4 +45,15 @@ class PostViewModel: ObservableObject {
             }
         }
     }
+    
+    func addPost(post: Post) {
+        postApiService.createPost(post: post) { result in
+            switch result {
+            case .success():
+                print("Başarıyla eklendi.")
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
+    }
 }

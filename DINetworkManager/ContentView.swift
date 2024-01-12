@@ -11,7 +11,7 @@ struct ContentView: View {
     var body: some View {
         NavigationStack {
             VStack {
-                SinglePostView()
+                PostListView(apiService: AlamofireApiService.shared)
             }
             .navigationTitle("Posts")
         }

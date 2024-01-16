@@ -29,7 +29,6 @@ class PostViewModel: ObservableObject {
                 DispatchQueue.main.async {
                     self.posts = posts
                 }
-                
             case .failure(let error):
                 print(error.localizedDescription)
             }
@@ -63,6 +62,30 @@ class PostViewModel: ObservableObject {
                 self.message = error.localizedDescription
                 self.isError = true
                 
+            }
+            self.isShowing = true
+        }
+    }
+    
+    func deletePost(postId: Int) {
+        postApiService.deletePost(postId: postId) { result in
+            switch result {
+            case .success():
+                self.title = "Success"
+                self.message = "Post deleted."
+                self.isError = false
+                
+                // JSONPlaceHolder da veriler gerçekten silinmediği için diziden silme işlemi yapıyoruz demo amaçlı.
+                if let index = self.posts.firstIndex(where: { $0.id == postId }) {
+                    self.posts.remove(at: index)
+                }
+                //
+
+            case .failure(let error):
+                print(error.localizedDescription)
+                self.title = "Error"
+                self.message = error.localizedDescription
+                self.isError = true
             }
             self.isShowing = true
         }

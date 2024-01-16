@@ -8,10 +8,14 @@
 
 import SwiftUI
 import SwiftUISnackbar
+import SwipeCell
 
 struct PostListView: View {
     
     //  constructor injection yöntemiyle DI yapıyoruz burada. PostListview kullanmak istediğimiz her yerde api servisi tanımlamak zorundayız
+    @State private var share = false
+    @State private var delete = false
+    
     @StateObject var viewModel: PostViewModel
     init(apiService:  ApiServiceProtocol) {
         _viewModel = StateObject(wrappedValue: PostViewModel(postApiService: .init(apiService: apiService)))
@@ -21,31 +25,60 @@ struct PostListView: View {
     //    @StateObject var viewModel = PostViewModel(postApiService: .init(apiService: AlamofireApiService.shared))
     
     var body: some View {
-        
-        VStack {
-            List(viewModel.posts) { post in
-                NavigationLink(destination: PostDetailView(post: post)) {
-                    HStack {
-                        Text("\(post.id)")
-                            .padding()
-                            .foregroundColor(.white)
-                            .background(.blue)
-                            .clipShape(.circle)
-                        
-                        VStack(alignment: .leading) {
-                            Text(post.title)
-                                .bold()
-                                .font(.subheadline)
-                        }
+        List(viewModel.posts) { post in
+            let button1 = SwipeCellButton(
+                buttonStyle: .titleAndImage,
+                title: "Share",
+                systemImage: "square.and.arrow.up",
+                titleColor: .white,
+                imageColor: .white,
+                view: nil,
+                backgroundColor: .orange,
+                action: {
+                    //
+                },
+                feedback: true
+            )
+            let button2 = SwipeCellButton(
+                buttonStyle: .titleAndImage,
+                title: "Delete",
+                systemImage: "trash",
+                titleColor: .white,
+                imageColor: .white,
+                view: nil,
+                backgroundColor: .red,
+                action: {
+                    viewModel.deletePost(postId: post.id)
+                },
+                feedback: true
+            )
+            let slot1 = SwipeCellSlot(slots: [button1, button2])
+            
+            NavigationLink(destination: PostDetailView(post: post)) {
+                HStack {
+                    Text("\(post.id)")
+                        .padding()
+                        .foregroundColor(.white)
+                        .background(.blue)
+                        .clipShape(.circle)
+                    
+                    VStack(alignment: .leading) {
+                        Text(post.title)
+                            .bold()
+                            .font(.subheadline)
                     }
                 }
-                
+                .swipeCell(cellPosition: .right, leftSlot: nil, rightSlot: slot1)
             }
-            .onAppear{
-                viewModel.fetchAllPosts()
-                //viewModel.fetchAllPosts(parameters: ["id":3])
-                //viewModel.fetchAllPosts(parameters: ["userId":3])
-            }
+        }
+        .refreshable {
+            viewModel.posts.removeAll()
+            viewModel.fetchAllPosts()
+        }
+        .onAppear{
+            viewModel.fetchAllPosts()
+            //viewModel.fetchAllPosts(parameters: ["id":3])
+            //viewModel.fetchAllPosts(parameters: ["userId":3])
         }
         .overlay {
             if viewModel.posts.isEmpty {

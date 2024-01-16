@@ -45,4 +45,19 @@ class AlamofireApiService: ApiServiceProtocol {
             }
         }
     }
+    
+    func deleteRequest(endpoint: URL, completion: @escaping (Result<Void, Error>) -> Void) {
+        AF.request(endpoint,
+                   method: .delete
+        )
+        .validate()
+        .responseData { response in
+            switch response.result {
+            case .success:
+                completion(.success(()))
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
+    }
 }

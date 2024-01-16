@@ -47,4 +47,15 @@ class PostApiService{
             }
         }
     }
+    
+    func deletePost(postId: Int, completion: @escaping (Result<Void, Error>) -> Void) { // parametrik olarak da gerçekleştirebilirizi.
+        apiService.deleteRequest(endpoint: APIConstants.getPostEndpoint.appending(path: "\(postId)")) { result in
+            switch result {
+            case .success(let value):
+                completion(.success(value))
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
+    }
 }

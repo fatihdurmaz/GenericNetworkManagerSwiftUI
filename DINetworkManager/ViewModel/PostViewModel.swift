@@ -11,6 +11,10 @@ class PostViewModel: ObservableObject {
     
     @Published var posts: [Post] = []
     @Published var post: Post?
+    @Published var isShowing: Bool = false
+    @Published var isError: Bool = false
+    @Published var title = ""
+    @Published var message = ""
     
     let postApiService: PostApiService
     
@@ -39,7 +43,6 @@ class PostViewModel: ObservableObject {
                 DispatchQueue.main.async {
                     self.post = post
                 }
-                
             case .failure(let error):
                 print(error.localizedDescription)
             }
@@ -50,10 +53,18 @@ class PostViewModel: ObservableObject {
         postApiService.createPost(post: post) { result in
             switch result {
             case .success():
-                print("Başarıyla eklendi.")
+                self.title = "Success"
+                self.message = "Post added."
+                self.isError = false
+                
             case .failure(let error):
                 print(error.localizedDescription)
+                self.title = "Error"
+                self.message = error.localizedDescription
+                self.isError = true
+                
             }
+            self.isShowing = true
         }
     }
 }

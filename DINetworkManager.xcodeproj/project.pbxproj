@@ -22,6 +22,7 @@
 		DEC97D092B4F616B0059F398 /* PostViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEC97D082B4F616B0059F398 /* PostViewModel.swift */; };
 		DEF652392B516BF200B173B7 /* PostDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEF652382B516BF200B173B7 /* PostDetailView.swift */; };
 		DEF6523B2B51802900B173B7 /* SinglePostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEF6523A2B51802900B173B7 /* SinglePostView.swift */; };
+		DEFAF74E2B566B0F008EF720 /* SwiftUISnackbar in Frameworks */ = {isa = PBXBuildFile; productRef = DEFAF74D2B566B0F008EF720 /* SwiftUISnackbar */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -48,6 +49,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DEC97CFD2B4F60E70059F398 /* Alamofire in Frameworks */,
+				DEFAF74E2B566B0F008EF720 /* SwiftUISnackbar in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -189,6 +191,7 @@
 			name = DINetworkManager;
 			packageProductDependencies = (
 				DEC97CFC2B4F60E70059F398 /* Alamofire */,
+				DEFAF74D2B566B0F008EF720 /* SwiftUISnackbar */,
 			);
 			productName = DINetworkManager;
 			productReference = DEC97CE02B4F60BA0059F398 /* DINetworkManager.app */;
@@ -220,6 +223,7 @@
 			mainGroup = DEC97CD72B4F60BA0059F398;
 			packageReferences = (
 				DEC97CFB2B4F60E70059F398 /* XCRemoteSwiftPackageReference "Alamofire" */,
+				DEFAF74C2B566B0F008EF720 /* XCRemoteSwiftPackageReference "SwiftUISnackbar" */,
 			);
 			productRefGroup = DEC97CE12B4F60BA0059F398 /* Products */;
 			projectDirPath = "";
@@ -474,6 +478,14 @@
 				minimumVersion = 5.8.1;
 			};
 		};
+		DEFAF74C2B566B0F008EF720 /* XCRemoteSwiftPackageReference "SwiftUISnackbar" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/zaniluca/SwiftUISnackbar";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -481,6 +493,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = DEC97CFB2B4F60E70059F398 /* XCRemoteSwiftPackageReference "Alamofire" */;
 			productName = Alamofire;
+		};
+		DEFAF74D2B566B0F008EF720 /* SwiftUISnackbar */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DEFAF74C2B566B0F008EF720 /* XCRemoteSwiftPackageReference "SwiftUISnackbar" */;
+			productName = SwiftUISnackbar;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

@@ -8,6 +8,15 @@
         "revision" : "3dc6a42c7727c49bf26508e29b0a0b35f9c7e1ad",
         "version" : "5.8.1"
       }
+    },
+    {
+      "identity" : "swiftuisnackbar",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/zaniluca/SwiftUISnackbar",
+      "state" : {
+        "branch" : "main",
+        "revision" : "ff5132c91e3a3855af679e648b95c8ab60c5eeb1"
+      }
     }
   ],
   "version" : 2

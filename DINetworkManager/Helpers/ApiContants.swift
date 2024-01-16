@@ -9,5 +9,5 @@ import Foundation
 
 class APIConstants {
     static let baseURL = URL(string: "https://jsonplaceholder.typicode.com")!
-    static let getPostEndpoint = baseURL.appending(path: "posts")
+    static let getPostEndpoint = baseURL.appending(path: "postsh")
 }

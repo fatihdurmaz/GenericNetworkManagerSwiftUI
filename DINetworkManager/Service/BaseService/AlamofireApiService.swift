@@ -60,4 +60,23 @@ class AlamofireApiService: ApiServiceProtocol {
             }
         }
     }
+    
+    func updateRequest<T: Codable>(endpoint: URL, identifier: Int, newData: T, completion: @escaping(Result<Void, Error>) -> Void) {
+        let updateEndpoint = endpoint.appending(path: "\(identifier)")
+
+        AF.request(updateEndpoint,
+                   method: .put,
+                   parameters: newData,
+                   encoder: JSONParameterEncoder.default
+        )
+        .validate(statusCode: 200..<300)
+        .responseData { response in
+            switch response.result {
+            case .success:
+                completion(.success(()))
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
+    }
 }

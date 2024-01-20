@@ -90,4 +90,22 @@ class PostViewModel: ObservableObject {
             self.isShowing = true
         }
     }
+    
+    func updatePost(postId: Int, newPostData: Post) {
+        postApiService.updatePost(postId: postId, newPostData: newPostData) { result in
+            switch result {
+            case .success:
+                self.title = "Success"
+                self.message = "Post updated."
+                self.isError = false
+
+            case .failure(let error):
+                print(error.localizedDescription)
+                self.title = "Error"
+                self.message = error.localizedDescription
+                self.isError = true
+            }
+            self.isShowing = true
+        }
+    }
 }

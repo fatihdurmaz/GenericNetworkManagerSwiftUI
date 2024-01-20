@@ -100,6 +100,15 @@ struct PostListView: View {
                 Image(systemName: "plus.circle")
                     .tint(.black)
             })
+            
+            Button(action: {
+                let updatePost = Post(userId: 1, id: 1, title: "Deneme", body: "Deneme İçeriği")
+                viewModel.updatePost(postId: 1, newPostData: updatePost )
+                
+            }, label: {
+                Image(systemName: "pencil.and.scribble")
+                    .tint(.black)
+            })
         }
         .snackbar(isShowing: $viewModel.isShowing, title: viewModel.title, text: viewModel.message, style: viewModel.isError ? .error : .default)
     }

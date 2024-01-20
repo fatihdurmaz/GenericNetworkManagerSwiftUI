@@ -58,4 +58,15 @@ class PostApiService{
             }
         }
     }
+    
+    func updatePost(postId: Int, newPostData: Post, completion: @escaping (Result<Void, Error>) -> Void) {
+        apiService.updateRequest(endpoint: APIConstants.getPostEndpoint, identifier: postId, newData: newPostData) { result in
+            switch result {
+            case .success:
+                completion(.success(()))
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
+    }
 }

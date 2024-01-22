@@ -7,32 +7,32 @@
 
 import SwiftUI
 
-struct SinglePostView: View {
-    @StateObject var viewModel = PostViewModel(postApiService: .init(apiService: AlamofireApiService.shared))
+struct SingleProductView: View {
+    @StateObject var viewModel = ProductViewModel(productApiService: .init(apiService: AlamofireApiService.shared))
     
     var body: some View {
         NavigationStack {
             List {
                 HStack {
                     Image(systemName: "book.pages")
-                    Text(viewModel.post?.title ?? "Veri Yok")
+                    Text(viewModel.product?.title ?? "Veri Yok")
                         .bold()
                         .font(.headline)
                 }
                 
                 HStack {
                     Image(systemName: "paragraphsign")
-                    Text(viewModel.post?.body ?? "Veri Yok")
+                    Text(viewModel.product?.description ?? "Veri Yok")
                 }
             }
             .onAppear{
-                viewModel.fetchPostById(postId: 2)
+                viewModel.fetchProductById(productId: 1)
             }
-            .navigationTitle("Single Post")
+            .navigationTitle("Single Product")
         }
     }
 }
 
 #Preview {
-    SinglePostView()
+    SingleProductView()
 }

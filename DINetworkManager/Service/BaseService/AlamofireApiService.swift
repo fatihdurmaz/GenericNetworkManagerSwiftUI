@@ -15,10 +15,7 @@ class AlamofireApiService: ApiServiceProtocol {
     static let shared = AlamofireApiService()
     
     func getRequest<T: Codable>(endpoint: URL, parameters: [String: Any]?, completion: @escaping (Result<T, Error>) -> Void) {
-        AF.request(endpoint,
-                   method: .get,
-                   parameters: parameters
-        )
+        AF.request(endpoint, method: .get, parameters: parameters)
         .validate()
         .responseDecodable(of: T.self) { response in
             switch response.result {
@@ -31,52 +28,42 @@ class AlamofireApiService: ApiServiceProtocol {
     }
     
     func addRequest<T: Codable>(endpoint: URL, data: T, completion: @escaping (Result<Void, Error>) -> Void) {
-        AF.request(endpoint,
-                   method: .post,
-                   encoding: JSONEncoding.default
-        )
-        .validate(statusCode: 200..<300)
-        .responseData { response in
-            switch response.result {
-            case .success:
-                completion(.success(()))
-            case .failure(let error):
-                completion(.failure(error))
+        AF.request(endpoint, method: .post, parameters: data, encoder: JSONParameterEncoder.default)
+            .validate()
+            .responseData { response in
+                switch response.result {
+                case .success:
+                    completion(.success(()))
+                case .failure(let error):
+                    completion(.failure(error))
+                }
             }
-        }
+    }
+    
+    func updateRequest<T: Codable>(endpoint: URL, data: T, completion: @escaping(Result<Void, Error>) -> Void) {
+        AF.request(endpoint, method: .put, parameters: data, encoder: JSONParameterEncoder.default)
+            .validate()
+            .responseData { response in
+                switch response.result {
+                case .success:
+                    completion(.success(()))
+                case .failure(let error):
+                    completion(.failure(error))
+                }
+            }
     }
     
     func deleteRequest(endpoint: URL, completion: @escaping (Result<Void, Error>) -> Void) {
-        AF.request(endpoint,
-                   method: .delete
-        )
-        .validate()
-        .responseData { response in
-            switch response.result {
-            case .success:
-                completion(.success(()))
-            case .failure(let error):
-                completion(.failure(error))
+        AF.request(endpoint, method: .delete)
+            .validate()
+            .responseData { response in
+                switch response.result {
+                case .success:
+                    completion(.success(()))
+                case .failure(let error):
+                    completion(.failure(error))
+                }
             }
-        }
     }
     
-    func updateRequest<T: Codable>(endpoint: URL, identifier: Int, newData: T, completion: @escaping(Result<Void, Error>) -> Void) {
-        let updateEndpoint = endpoint.appending(path: "\(identifier)")
-
-        AF.request(updateEndpoint,
-                   method: .put,
-                   parameters: newData,
-                   encoder: JSONParameterEncoder.default
-        )
-        .validate(statusCode: 200..<300)
-        .responseData { response in
-            switch response.result {
-            case .success:
-                completion(.success(()))
-            case .failure(let error):
-                completion(.failure(error))
-            }
-        }
-    }
 }

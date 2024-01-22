@@ -1,33 +1,33 @@
 //
-//  UserViewModel.swift
-//  AlamofireGenericNetworkService
+//  ProductViewModel.swift
+//  DINetworkManager
 //
-//  Created by Fatih Durmaz on 11.01.2024.
+//  Created by Fatih Durmaz on 22.01.2024.
 //
 
 import Foundation
 
-class PostViewModel: ObservableObject {
+class ProductViewModel: ObservableObject {
     
-    @Published var posts: [Post] = []
-    @Published var post: Post?
+    @Published var products: [Product] = []
+    @Published var product: Product?
     @Published var isShowing: Bool = false
     @Published var isError: Bool = false
     @Published var title = ""
     @Published var message = ""
     
-    let postApiService: PostApiService
+    let productApiService: ProductApiService
     
-    init(postApiService: PostApiService) {
-        self.postApiService = postApiService
+    init(productApiService: ProductApiService) {
+        self.productApiService = productApiService
     }
     
-    func fetchAllPosts(parameters: [String: Any]? = nil) {
-        postApiService.getAllPosts(parameters: parameters) { result in
+    func fetchAllProducts(parameters: [String: Any]? = nil) {
+        productApiService.getAllProducts(parameters: parameters) { result in
             switch result {
-            case .success(let posts):
+            case .success(let products):
                 DispatchQueue.main.async {
-                    self.posts = posts
+                    self.products = products
                 }
             case .failure(let error):
                 print(error.localizedDescription)
@@ -35,12 +35,12 @@ class PostViewModel: ObservableObject {
         }
     }
     
-    func fetchPostById(postId: Int) {
-        postApiService.getPostById(postId: postId ) { result in
+    func fetchProductById(productId: Int) {
+        productApiService.getProductById(productId: productId ) { result in
             switch result {
-            case .success(let post):
+            case .success(let product):
                 DispatchQueue.main.async {
-                    self.post = post
+                    self.product = product
                 }
             case .failure(let error):
                 print(error.localizedDescription)
@@ -48,14 +48,13 @@ class PostViewModel: ObservableObject {
         }
     }
     
-    func addPost(post: Post) {
-        postApiService.createPost(post: post) { result in
+    func addProduct(product: Product) {
+        productApiService.createProduct(product: product) { result in
             switch result {
             case .success():
                 self.title = "Success"
-                self.message = "Post added."
+                self.message = "Product added."
                 self.isError = false
-                
             case .failure(let error):
                 print(error.localizedDescription)
                 self.title = "Error"
@@ -67,38 +66,36 @@ class PostViewModel: ObservableObject {
         }
     }
     
-    func deletePost(postId: Int) {
-        postApiService.deletePost(postId: postId) { result in
-            switch result {
-            case .success():
-                self.title = "Success"
-                self.message = "Post deleted."
-                self.isError = false
-                
-                // JSONPlaceHolder da veriler gerçekten silinmediği için diziden silme işlemi yapıyoruz demo amaçlı.
-                if let index = self.posts.firstIndex(where: { $0.id == postId }) {
-                    self.posts.remove(at: index)
-                }
-                //
-
-            case .failure(let error):
-                print(error.localizedDescription)
-                self.title = "Error"
-                self.message = error.localizedDescription
-                self.isError = true
-            }
-            self.isShowing = true
-        }
-    }
-    
-    func updatePost(postId: Int, newPostData: Post) {
-        postApiService.updatePost(postId: postId, newPostData: newPostData) { result in
+    func updateProduct(productId: Int, product: Product) {
+        productApiService.updateProduct(productId: productId, product: product) { result in
             switch result {
             case .success:
                 self.title = "Success"
-                self.message = "Post updated."
+                self.message = "Product \(productId) updated."
                 self.isError = false
-
+                
+            case .failure(let error):
+                print(error.localizedDescription)
+                self.title = "Error"
+                self.message = error.localizedDescription
+                self.isError = true
+            }
+            self.isShowing = true
+        }
+    }
+    
+    func deleteProduct(productId: Int) {
+        productApiService.deleteProduct(productId: productId) { result in
+            switch result {
+            case .success():
+                self.title = "Success"
+                self.message = "Product \(productId) deleted."
+                self.isError = false
+                
+                if let index = self.products.firstIndex(where: { $0.id == productId }) {
+                    self.products.remove(at: index)
+                }
+                
             case .failure(let error):
                 print(error.localizedDescription)
                 self.title = "Error"

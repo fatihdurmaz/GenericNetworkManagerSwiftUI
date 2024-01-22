@@ -26,6 +26,7 @@
 		DEF28AA12B569E6900249813 /* SwipeCell in Frameworks */ = {isa = PBXBuildFile; productRef = DEF28AA02B569E6900249813 /* SwipeCell */; };
 		DEF6523B2B51802900B173B7 /* SingleProductView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEF6523A2B51802900B173B7 /* SingleProductView.swift */; };
 		DEFAF74E2B566B0F008EF720 /* SwiftUISnackbar in Frameworks */ = {isa = PBXBuildFile; productRef = DEFAF74D2B566B0F008EF720 /* SwiftUISnackbar */; };
+		DEFEBC2C2B5F0FE50082419C /* StarRating in Frameworks */ = {isa = PBXBuildFile; productRef = DEFEBC2B2B5F0FE50082419C /* StarRating */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -54,6 +55,7 @@
 				DE614B242B5EA4A700A1181A /* SDWebImageSwiftUI in Frameworks */,
 				DE614B222B5EA41E00A1181A /* SDWebImageSwiftUI in Frameworks */,
 				DEC97CFD2B4F60E70059F398 /* Alamofire in Frameworks */,
+				DEFEBC2C2B5F0FE50082419C /* StarRating in Frameworks */,
 				DEFAF74E2B566B0F008EF720 /* SwiftUISnackbar in Frameworks */,
 				DEF28AA12B569E6900249813 /* SwipeCell in Frameworks */,
 			);
@@ -201,6 +203,7 @@
 				DEF28AA02B569E6900249813 /* SwipeCell */,
 				DE614B212B5EA41E00A1181A /* SDWebImageSwiftUI */,
 				DE614B232B5EA4A700A1181A /* SDWebImageSwiftUI */,
+				DEFEBC2B2B5F0FE50082419C /* StarRating */,
 			);
 			productName = DINetworkManager;
 			productReference = DEC97CE02B4F60BA0059F398 /* DINetworkManager.app */;
@@ -235,6 +238,7 @@
 				DEFAF74C2B566B0F008EF720 /* XCRemoteSwiftPackageReference "SwiftUISnackbar" */,
 				DEF28A9F2B569E6900249813 /* XCRemoteSwiftPackageReference "SwipeCell" */,
 				DE614B202B5EA41E00A1181A /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */,
+				DEFEBC2A2B5F0FE50082419C /* XCRemoteSwiftPackageReference "StarRating" */,
 			);
 			productRefGroup = DEC97CE12B4F60BA0059F398 /* Products */;
 			projectDirPath = "";
@@ -513,6 +517,14 @@
 				kind = branch;
 			};
 		};
+		DEFEBC2A2B5F0FE50082419C /* XCRemoteSwiftPackageReference "StarRating" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/dkk/StarRating";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -540,6 +552,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = DEFAF74C2B566B0F008EF720 /* XCRemoteSwiftPackageReference "SwiftUISnackbar" */;
 			productName = SwiftUISnackbar;
+		};
+		DEFEBC2B2B5F0FE50082419C /* StarRating */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DEFEBC2A2B5F0FE50082419C /* XCRemoteSwiftPackageReference "StarRating" */;
+			productName = StarRating;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

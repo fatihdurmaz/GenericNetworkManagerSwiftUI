@@ -12,7 +12,7 @@ struct DINetworkManagerApp: App {
     
     init() {
         let appareance = UINavigationBarAppearance()
-        appareance.configureWithOpaqueBackground()
+        appareance.configureWithDefaultBackground()
         UINavigationBar.appearance().standardAppearance = appareance
         UINavigationBar.appearance().scrollEdgeAppearance = appareance
     }

@@ -7,10 +7,12 @@
 
 import SwiftUI
 import SDWebImageSwiftUI
+import StarRating
 
 struct ProductDetailView: View {
     
     let product: Product
+    @State var customConfig = StarRatingConfiguration(shadowRadius: 0)
     
     var body: some View {
         NavigationStack {
@@ -18,21 +20,22 @@ struct ProductDetailView: View {
                 TabView {
                     ForEach(product.images, id: \.self) { imageUrl in
                         WebImage(url: URL(string: imageUrl))
-                            .resizable()
+                            .resizable() // Resizable like SwiftUI.Image, you must use this 
                             .placeholder {
                                 Rectangle().foregroundColor(.gray)
                             }
-                            .indicator(.activity)
-                            .transition(.fade(duration: 0.5))
+                            .indicator(.activity) // Activity Indicator
+                            .transition(.fade(duration: 0.5)) // Fade Transition with duration
                             .scaledToFit()
                             .cornerRadius(8)
-                            .shadow(radius: 8)
+                            .shadow(radius: 10)
                             .padding()
+                            .frame(width: UIScreen.main.bounds.width * 0.9)
                     }
                 }
                 .tabViewStyle(.page)
                 .indexViewStyle(.page(backgroundDisplayMode: .always))
-                
+
                 Divider()
                 
                 VStack(alignment: .leading) {
@@ -49,30 +52,32 @@ struct ProductDetailView: View {
                     
                     Divider()
                     
-                    HStack {
+                    HStack (alignment: .center) {
                         Text("Price: $\(String(format: "%.2f", product.discountPercentage))")
                             .font(.headline)
                             .fontWeight(.bold)
                         
                         Spacer()
                         
-                        Text("Rating: \(String(format: "%.2f", product.rating))")
-                            .font(.headline)
-                            .fontWeight(.bold)
+                        StarRating(initialRating: product.rating, configuration: $customConfig)
+                            .frame(width: 200,height: 30)
+                        
                     }
                     
                     Divider()
                     
-                    Text("In Stock: \(product.stock) units")
-                        .foregroundColor(product.stock > 0 ? .green : .red)
-                        .font(.headline)
-                        .fontWeight(.bold)
-                    
-                    Divider()
-                    
-                    Text("Category: \(product.category)")
-                        .bold()
-                        .foregroundStyle(.teal)
+                    HStack {
+                        Text("In Stock: \(product.stock) units")
+                            .foregroundColor(product.stock > 0 ? .green : .red)
+                            .font(.headline)
+                            .fontWeight(.bold)
+                        Spacer()
+                        
+                        Text("Category: \(product.category)")
+                            .bold()
+                            .foregroundStyle(.orange)
+                    }
+                    Spacer()
                 }
             }
             .padding()

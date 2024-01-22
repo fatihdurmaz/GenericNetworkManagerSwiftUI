@@ -8,6 +8,7 @@
 import SwiftUI
 import SwiftUISnackbar
 import SwipeCell
+import SDWebImageSwiftUI
 
 struct ProductListView: View {
     
@@ -56,16 +57,22 @@ struct ProductListView: View {
             
             NavigationLink(destination: ProductDetailView(product: product)) {
                 HStack {
-                    Text("\(product.id!)")
-                        .padding()
-                        .foregroundColor(.white)
-                        .background(.blue)
-                        .clipShape(.circle)
+                    WebImage(url: URL(string: product.thumbnail))
+                        .resizable()
+                        .placeholder {
+                            Rectangle().foregroundColor(.gray)
+                        }
+                        .scaledToFit()
+                        .cornerRadius(8)
+                        .frame(width: 75, height: 75)
+                    
                     
                     VStack(alignment: .leading) {
                         Text(product.title)
-                            .bold()
-                            .font(.subheadline)
+                            .font(.title3)
+                        
+                        Text("Price: $\(String(format: "%.2f", product.discountPercentage))")
+                            .italic()
                     }
                 }
                 .swipeCell(cellPosition: .right, leftSlot: nil, rightSlot: slot1)

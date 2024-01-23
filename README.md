@@ -7,6 +7,15 @@
 Bu örnek proje, SwiftUI kullanarak Dependency Injection (DI) ve Singleton tasarım desenini, MVVM ile Generic Network Manager oluşturmayı gösterir. 
 Proje, Alamofire veya URLSession ile DummyJSON API'den verileri çekmeyi amaçlar.
 
+- [x] Desing Patterns
+- [x] MVVM
+- [x] Alamofire Api Servisi
+- [ ] URLSession Servisi
+- [ ] Auth Mekanizması
+- [x] Generic Network Layer
+- [x] UI Tasarımı
+- [x] 3. parti kütüphane entegrasyonları
+
 - SwiftUI
 - MVVM
 - Singleton

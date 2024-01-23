@@ -16,7 +16,6 @@ Proje, Alamofire veya URLSession ile DummyJSON API'den verileri çekmeyi amaçla
 - [x] UI Tasarımı
 - [x] 3. parti kütüphane entegrasyonları
 
-
 - SwiftUI
 - MVVM
 - Singleton
@@ -29,9 +28,7 @@ Proje, Alamofire veya URLSession ile DummyJSON API'den verileri çekmeyi amaçla
 - SwipeActions
 - .searchable modifier
 - NavigationStack
-
-
-
+- 
 ## Product Model
 
 ```swift

@@ -1,6 +1,8 @@
 # SwiftUI Generic Service with Alamofire and URLSession
 ![Swift](https://img.shields.io/badge/Swift-5.9-orange.svg)
-![Platform](https://img.shields.io/badge/Platform-iOS%20%7CMacOS-red.svg)
+![Platform](https://img.shields.io/badge/Platform-iOS-red.svg)
+![Platform](https://img.shields.io/badge/SwiftUI-4-green.svg)
+
 ![License](https://img.shields.io/badge/License-MIT-blue.svg)
 
 Bu örnek proje, SwiftUI kullanarak Dependency Injection (DI) ve Singleton tasarım desenini, MVVM ile Generic Network Manager oluşturmayı gösterir. 

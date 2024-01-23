@@ -138,6 +138,11 @@ class ProductViewModel: ObservableObject {
     }
 }
 
+// fetchProductById()
+// addProduct()
+// updateProduct()
+// deleteProduct()
+
 ```
 ## View ile Kullanımı
 Dependency Injection kullanılarak ApiServiceProtocol singleton olarak ProductViewModel'e enjekte edilir ve bu ViewModel, ProductListView tarafından kullanılır.

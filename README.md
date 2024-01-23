@@ -17,19 +17,6 @@ Proje, Alamofire veya URLSession ile DummyJSON API'den verileri çekmeyi amaçla
 - [x] UI Tasarımı
 - [x] 3. parti kütüphane entegrasyonları
 
-- SwiftUI
-- MVVM
-- Singleton
-- Dependency Injection
-- Generic Network Layer
-- Protocol Oriented Programming (POP)
-- Alamofire & URLSession
-- ContentUnavailableView
-- SDWebImage
-- SwipeActions
-- .searchable modifier
-- NavigationStack
-- 
 ## Product Model
 
 ```swift
@@ -179,3 +166,16 @@ struct ContentView: View {
     }
 }
 ```
+## Özellikler
+
+- MVVM
+- Singleton
+- Dependency Injection
+- Generic Network Layer
+- Protocol Oriented Programming (POP)
+- Alamofire & URLSession
+- ContentUnavailableView
+- SDWebImage
+- SwipeActions
+- .searchable modifier
+- NavigationStack

@@ -3,16 +3,42 @@
 ![Platform](https://img.shields.io/badge/Platform-iOS%20%7CMacOS-red.svg)
 ![License](https://img.shields.io/badge/License-MIT-blue.svg)
 
-Bu örnek proje, SwiftUI kullanarak Dependency Injection (DI) ve Singleton tasarım desenini, MVVM ve Generic Network Manager oluşturmayı gösterir. 
-Proje, Alamofire veya URLSession ile JSONPlaceholder API'den verileri çekmeyi amaçlar.
+Bu örnek proje, SwiftUI kullanarak Dependency Injection (DI) ve Singleton tasarım desenini, MVVM ile Generic Network Manager oluşturmayı gösterir. 
+Proje, Alamofire veya URLSession ile DummyJSON API'den verileri çekmeyi amaçlar.
 
 - SwiftUI
+- MVVM
 - Singleton
 - Dependency Injection
-- MVVM
 - Generic Network Layer
 - Protocol Oriented Programming (POP)
 - Alamofire & URLSession
+- ContentUnavailableView
+- SDWebImage
+- SwipeActions
+- .searchable modifier
+- NavigationStack
+
+
+
+## Product Model
+
+```swift
+  struct ProductResponse: Codable {
+    let products: [Product]
+}
+
+struct Product: Codable, Identifiable {
+    let id: Int?
+    let title, description: String
+    let price: Int
+    let discountPercentage, rating: Double
+    let stock: Int
+    let brand, category: String
+    let thumbnail: String
+    let images: [String]
+}
+```
 
 ## ApiServiceProtocol Protocol
 

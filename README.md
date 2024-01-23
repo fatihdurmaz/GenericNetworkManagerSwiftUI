@@ -20,11 +20,14 @@ Proje, Alamofire veya URLSession ile JSONPlaceholder API'den verileri çekmeyi a
 
 ```swift
 protocol ApiServiceProtocol {
-    func getRequest<T: Codable>(endpoint: String, completion: @escaping(Result<T, Error>) -> Void )
+    func getRequest<T: Codable>(endpoint: URL, parameters: [String: Any]?, completion: @escaping(Result<T, Error>) -> Void )
+    func addRequest<T: Codable>(endpoint: URL, data: T, completion: @escaping(Result<Void, Error>) -> Void)
+    func updateRequest<T: Codable>(endpoint: URL, data: T, completion: @escaping(Result<Void, Error>) -> Void)
+    func deleteRequest(endpoint: URL, completion: @escaping(Result<Void, Error>) -> Void)
 }
 ```
-## AlamofireApiService Singleton Implementation
-AlamofireApiService adlı sınıf, NetworkService protocolünü uygular ve bu sınıfı singleton olarak tasarlar.
+## AlamofireApiService 
+AlamofireApiService adlı sınıf, ApiService protocolünü uygular ve bu sınıfı singleton olarak tasarlar.
 
 ```swift
 class AlamofireApiService: ApiServiceProtocol {
@@ -33,82 +36,79 @@ class AlamofireApiService: ApiServiceProtocol {
     
     static let shared = AlamofireApiService()
     
-    func getRequest<T: Codable>(endpoint: String, completion: @escaping (Result<T, Error>) -> Void) {
-        AF.request(endpoint)
-            .validate()
-            .responseDecodable(of: T.self) { response in
-                switch response.result {
-                case .success(let value):
-                    completion(.success(value))
-                case .failure(let error):
-                    completion(.failure(error))
-                }
+    func getRequest<T: Codable>(endpoint: URL, parameters: [String: Any]?, completion: @escaping (Result<T, Error>) -> Void) {
+        AF.request(endpoint, method: .get, parameters: parameters)
+        .validate()
+        .responseDecodable(of: T.self) { response in
+            switch response.result {
+            case .success(let value):
+                completion(.success(value))
+            case .failure(let error):
+                completion(.failure(error))
             }
-    }
-}
-```
-
-## URLSessionApiService Singleton Implementation
-URLSessionApiService adlı sınıf, NetworkService protocolünü uygular ve bu sınıfı singleton olarak tasarlar.
-
-```swift
-class URLSessionApiService: ApiServiceProtocol {
-    
-    private init() { }
-    
-    static let shared = URLSessionApiService()
-    
-    func getRequest<T: Decodable>(endpoint: String, completion: @escaping (Result<T, Error>) -> Void) {
-        guard let url = URL(string: endpoint) else {
-            completion(.failure(NSError(domain: "Invalid URL", code: 0, userInfo: nil)))
-            return
         }
-        
-        URLSession.shared.dataTask(with: url) { data, response, error in
-            if let error = error {
-                completion(.failure(error))
-                return
-            }
-            
-            guard let data = data else {
-                completion(.failure(NSError(domain: "Data not found", code: 0, userInfo: nil)))
-                return
-            }
-            
-            do {
-                let decodedData = try JSONDecoder().decode(T.self, from: data)
-                completion(.success(decodedData))
-            } catch {
-                completion(.failure(error))
-            }
-        }.resume()
     }
-    
-}
+
+    // postRequest()
+    // updateReques()
+    // deleteRequest()
 ```
 
-## UserViewModel
-UserViewModel adlı ViewModel sınıfı, kullanıcıları çekmek ve kullanıcı arayüzünü güncellemek için kullanılır. Dependency Injection kullanılarak ApiServiceProtocol enjekte edilir.
+## ProductApiService
+ProductApiService adlı sınıf, ağ işlemleri için DI ile kendisine tanımlanacak olan (ApiService protokülü uygulayan) api servis ile işlemlerini gerçekleştirir.
 
 ```swift
-class UserViewModel: ObservableObject {
+class ProductApiService{
     
-    @Published var users: [User] = []
+    let apiService: ApiServiceProtocol
     
-    let userApiService: UserApiService
-    
-    init(userApiService: UserApiService) {
-        self.userApiService = userApiService
+    init(apiService: ApiServiceProtocol) {
+        self.apiService = apiService
     }
     
-    func fetchUsers() {
-        userApiService.getUsers { result in
+    func getAllProducts(parameters: [String: Any]?, completion: @escaping (Result<[Product], Error>) -> Void ){ // tüm postları getirmek için
+        apiService.getRequest(endpoint: APIConstants.getProductEndpoint, parameters: parameters) { (result: Result<ProductResponse, Error>) in
             switch result {
-            case .success(let users):
+            case .success(let data):
+                completion(.success(data.products))
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
+    }
+}
+// getProductById()
+// createProduct()
+// updateProduct()
+// deleteProduct()
+```
+
+## ProductViewModel
+ProductViewModel, ürünleri çekmek ve ürün arayüzünü güncellemek için kullanılır. Dependency Injection kullanılarak ApiServiceProtocol enjekte edilir.
+
+```swift
+class ProductViewModel: ObservableObject {
+    
+    @Published var products: [Product] = []
+    @Published var product: Product?
+    @Published var isShowing: Bool = false
+    @Published var isError: Bool = false
+    @Published var title = ""
+    @Published var message = ""
+    
+    let productApiService: ProductApiService
+    
+    init(productApiService: ProductApiService) {
+        self.productApiService = productApiService
+    }
+    
+    func fetchAllProducts(parameters: [String: Any]? = nil) {
+        productApiService.getAllProducts(parameters: parameters) { result in
+            switch result {
+            case .success(let products):
                 DispatchQueue.main.async {
-                    self.users = users
+                    self.products = products
                 }
-                
             case .failure(let error):
                 print(error.localizedDescription)
             }
@@ -117,17 +117,17 @@ class UserViewModel: ObservableObject {
 }
 
 ```
-## SwiftUI içerisinde Kullanımı
-Dependency Injection kullanılarak ApiServiceProtocol singleton olarak UserViewModel'e enjekte edilir ve bu ViewModel, UserListView tarafından kullanılır.
+## View ile Kullanımı
+Dependency Injection kullanılarak ApiServiceProtocol singleton olarak ProductViewModel'e enjekte edilir ve bu ViewModel, ProductListView tarafından kullanılır.
+
 ```swift
-struct UserListView: View {
+struct ProductListView: View {
     
-    @StateObject var viewModel: UserViewModel
-    
+    @StateObject var viewModel: ProductViewModel
     init(apiService:  ApiServiceProtocol) {
-        _viewModel = StateObject(wrappedValue: UserViewModel(userApiService: .init(apiService: apiService)))
+        _viewModel = StateObject(wrappedValue: ProductViewModel(productApiService: .init(apiService: apiService)))
     }
-    
+
     var body: some View {
         // ...
     }
@@ -137,10 +137,9 @@ struct ContentView: View {
     var body: some View {
         NavigationStack {
             VStack {
-                UserListView(apiService: URLSessionApiService.shared) // AlamofireApiService.shared olarak da değiştirebiliriz.
-                //Hangi servis ile kullanacağımızı belirtiriz.
+                ProductListView(apiService: AlamofireApiService.shared)
             }
-            .navigationTitle("Generic Service")
+            .navigationTitle("Products")
         }
     }
 }

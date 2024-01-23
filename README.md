@@ -4,7 +4,8 @@
 ![Platform](https://img.shields.io/badge/SwiftUI-4-green.svg)
 ![License](https://img.shields.io/badge/License-MIT-blue.svg)
 
-Bu örnek proje, SwiftUI kullanarak Dependency Injection (DI) ve Singleton tasarım desenini, MVVM ile Generic Network Manager oluşturmayı gösterir. 
+Bu örnek proje, SwiftUI kullanarak Dependency Injection (DI) ve Singleton tasarım desenini, MVVM ile Generic Network Manager oluşturmayı gösterir.
+
 Proje, Alamofire veya URLSession ile DummyJSON API'den verileri çekmeyi amaçlar.
 
 - [x] Desing Patterns

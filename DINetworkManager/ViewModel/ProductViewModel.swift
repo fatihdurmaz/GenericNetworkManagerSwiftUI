@@ -11,11 +11,13 @@ class ProductViewModel: ObservableObject {
     
     @Published var products: [Product] = []
     @Published var product: Product?
-    @Published var isShowing: Bool = false
+    @Published var isShowingSnackBar: Bool = false
     @Published var isError: Bool = false
     @Published var title = ""
     @Published var message = ""
-    
+    @Published var searchText:String = ""
+    @Published var isLoading: Bool = true
+
     let productApiService: ProductApiService
     
     init(productApiService: ProductApiService) {
@@ -28,10 +30,15 @@ class ProductViewModel: ObservableObject {
             case .success(let products):
                 DispatchQueue.main.async {
                     self.products = products
+                    self.isLoading = false
                 }
             case .failure(let error):
-                print(error.localizedDescription)
+                self.title = "Error"
+                self.message = error.localizedDescription
+                self.isError = true
+                self.isShowingSnackBar = true
             }
+
         }
     }
     
@@ -62,7 +69,7 @@ class ProductViewModel: ObservableObject {
                 self.isError = true
                 
             }
-            self.isShowing = true
+            self.isShowingSnackBar = true
         }
     }
     
@@ -80,7 +87,7 @@ class ProductViewModel: ObservableObject {
                 self.message = error.localizedDescription
                 self.isError = true
             }
-            self.isShowing = true
+            self.isShowingSnackBar = true
         }
     }
     
@@ -102,7 +109,15 @@ class ProductViewModel: ObservableObject {
                 self.message = error.localizedDescription
                 self.isError = true
             }
-            self.isShowing = true
+            self.isShowingSnackBar = true
+        }
+    }
+    
+    var filteredProducts: [Product] {
+        guard !searchText.isEmpty else { return self.products }
+        
+        return products.filter { product in
+            product.title.lowercased().contains(searchText.lowercased())
         }
     }
 }

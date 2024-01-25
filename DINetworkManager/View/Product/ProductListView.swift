@@ -16,91 +16,104 @@ struct ProductListView: View {
     init(apiService:  ApiServiceProtocol) {
         _viewModel = StateObject(wrappedValue: ProductViewModel(productApiService: .init(apiService: apiService)))
     }
-    let exampleProduct = Product(id: nil, title: "Deneme", description: "", price: 10, discountPercentage: 10, rating: 10, stock: 10, brand: "", category: "", thumbnail: "", images: [""])
+    let fakeProduct = Product(id: nil, title: "Deneme", description: "", price: 10, discountPercentage: 10, rating: 10, stock: 10, brand: "", category: "", thumbnail: "", images: [""])
     
-
+    
     // Alternatif kullanım
     // @StateObject var viewModel = PostViewModel(postApiService: .init(apiService: AlamofireApiService.shared))
     
     var body: some View {
-        List(viewModel.products) { product in
-            
-            let button1 = SwipeCellButton(
-                buttonStyle: .titleAndImage,
-                title: "Delete",
-                systemImage: "trash",
-                titleColor: .white,
-                imageColor: .white,
-                view: nil,
-                backgroundColor: .red,
-                action: {
-                    viewModel.deleteProduct(productId: product.id!)
-                },
-                feedback: true
-            )
-            
-            let button2 = SwipeCellButton(
-                buttonStyle: .titleAndImage,
-                title: "Update",
-                systemImage: "arrow.circlepath",
-                titleColor: .white,
-                imageColor: .white,
-                view: nil,
-                backgroundColor: .green,
-                action: {
-                    viewModel.updateProduct(productId: product.id!, product: exampleProduct)
-                },
-                feedback: true
-            )
-            
-            let slot1 = SwipeCellSlot(slots: [button2,button1])
-            
-            NavigationLink(destination: ProductDetailView(product: product)) {
-                HStack {
-                    WebImage(url: URL(string: product.thumbnail))
-                        .resizable()
-                        .placeholder {
-                            Rectangle().foregroundColor(.gray)
+        
+        Group {
+            if viewModel.isLoading {
+                ProgressView()
+                    .controlSize(.extraLarge)
+                    .padding()
+                    .background(.gray)
+                    .tint(.white)
+                    .clipShape(.rect(cornerRadius: 10))
+                
+                
+            } else {
+                List(viewModel.filteredProducts) { product in
+                    
+                    let button1 = SwipeCellButton(
+                        buttonStyle: .titleAndImage,
+                        title: "Delete",
+                        systemImage: "trash",
+                        titleColor: .white,
+                        imageColor: .white,
+                        view: nil,
+                        backgroundColor: .red,
+                        action: {
+                            viewModel.deleteProduct(productId: product.id!)
+                        },
+                        feedback: true
+                    )
+                    
+                    let button2 = SwipeCellButton(
+                        buttonStyle: .titleAndImage,
+                        title: "Update",
+                        systemImage: "arrow.circlepath",
+                        titleColor: .white,
+                        imageColor: .white,
+                        view: nil,
+                        backgroundColor: .green,
+                        action: {
+                            viewModel.updateProduct(productId: product.id!, product: fakeProduct)
+                        },
+                        feedback: true
+                    )
+                    
+                    let slot1 = SwipeCellSlot(slots: [button2,button1])
+                    
+                    NavigationLink(destination: ProductDetailView(product: product)) {
+                        HStack {
+                            WebImage(url: URL(string: product.thumbnail))
+                                .resizable()
+                                .placeholder {
+                                    Rectangle().foregroundColor(.gray)
+                                }
+                                .scaledToFit()
+                                .cornerRadius(8)
+                                .frame(width: 75, height: 75)
+                            
+                            
+                            VStack(alignment: .leading) {
+                                Text(product.title)
+                                    .font(.title3)
+                                
+                                Text("Price: $\(String(format: "%.2f", product.discountPercentage))")
+                                    .italic()
+                            }
                         }
-                        .scaledToFit()
-                        .cornerRadius(8)
-                        .frame(width: 75, height: 75)
-                    
-                    
-                    VStack(alignment: .leading) {
-                        Text(product.title)
-                            .font(.title3)
-                        
-                        Text("Price: $\(String(format: "%.2f", product.discountPercentage))")
-                            .italic()
+                        .swipeCell(cellPosition: .right, leftSlot: nil, rightSlot: slot1)
                     }
                 }
-                .swipeCell(cellPosition: .right, leftSlot: nil, rightSlot: slot1)
-            }
-        }
-        .onAppear{
-            viewModel.fetchAllProducts()
-        }
-        .overlay {
-            if viewModel.products.isEmpty {
-                ContentUnavailableView{
-                    Label("No Results", systemImage: "tray.fill")
-                        .bold()
-                } description: {
-                    Text("Not found products")
+                .searchable(text: $viewModel.searchText)
+                .textInputAutocapitalization(.never)
+                .overlay {
+                    if viewModel.filteredProducts.isEmpty {
+                        ContentUnavailableView.search(text: viewModel.searchText)
+                    }
                 }
+                .toolbar {
+                    Button(action: {
+                        viewModel.addProduct(product: fakeProduct)
+                    }, label: {
+                        Image(systemName: "plus.circle")
+                            .tint(.black)
+                    })
+                }
+                
             }
         }
-        
-        .toolbar {
-            Button(action: {
-                viewModel.addProduct(product: exampleProduct)
-            }, label: {
-                Image(systemName: "plus.circle")
-                    .tint(.black)
-            })
+        .onAppear {
+            if viewModel.isLoading {
+                viewModel.fetchAllProducts()
+            }
         }
-        .snackbar(isShowing: $viewModel.isShowing, title: viewModel.title, text: viewModel.message, style: viewModel.isError ? .error : .default)
+        .snackbar(isShowing: $viewModel.isShowingSnackBar, title: viewModel.title, text: viewModel.message, style: viewModel.isError ? .error : .default)
     }
 }
 

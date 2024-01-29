@@ -6,17 +6,19 @@
 //
 
 import Foundation
+import SwiftData
 
-class ProductViewModel: ObservableObject {
+@Observable
+class ProductViewModel{
     
-    @Published var products: [Product] = []
-    @Published var product: Product?
-    @Published var isShowingSnackBar: Bool = false
-    @Published var isError: Bool = false
-    @Published var title = ""
-    @Published var message = ""
-    @Published var searchText:String = ""
-    @Published var isLoading: Bool = true
+    var products: [Product] = []
+    var product: Product?
+    var isShowingSnackBar: Bool = false
+    var isError: Bool = false
+    var title = ""
+    var message = ""
+    var searchText:String = ""
+    var isLoading: Bool = true
 
     let productApiService: ProductApiService
     

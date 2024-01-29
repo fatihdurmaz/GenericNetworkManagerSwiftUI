@@ -12,9 +12,9 @@ import SDWebImageSwiftUI
 
 struct ProductListView: View {
     
-    @StateObject var viewModel: ProductViewModel
+    @Bindable var viewModel: ProductViewModel
     init(apiService:  ApiServiceProtocol) {
-        _viewModel = StateObject(wrappedValue: ProductViewModel(productApiService: .init(apiService: apiService)))
+        _viewModel = Bindable(wrappedValue: ProductViewModel(productApiService: .init(apiService: apiService)))
     }
     let fakeProduct = Product(id: nil, title: "Deneme", description: "", price: 10, discountPercentage: 10, rating: 10, stock: 10, brand: "", category: "", thumbnail: "", images: [""])
     

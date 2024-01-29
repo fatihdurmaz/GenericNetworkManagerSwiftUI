@@ -7,7 +7,7 @@
 
 import Foundation
 
-class APIConstants {
+final class APIConstants {
     static let baseURL = URL(string: "https://dummyjson.com")!
     static let getProductEndpoint = baseURL.appending(path: "products")
 }

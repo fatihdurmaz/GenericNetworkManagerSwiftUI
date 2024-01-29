@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct SingleProductView: View {
-    @StateObject var viewModel = ProductViewModel(productApiService: .init(apiService: AlamofireApiService.shared))
+    var viewModel = ProductViewModel(productApiService: .init(apiService: AlamofireApiService.shared))
     
     var body: some View {
         NavigationStack {
